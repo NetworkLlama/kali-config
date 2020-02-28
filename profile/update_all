@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# Update core packages
+echo '================'
+echo 'Updating Kali...'
+echo '================'
+echo ' '
+apt update && apt dist-upgrade && apt autoremove && apt clean all
+
+# Update Cobalt Strike
+echo ' '
+echo '========================='
+echo 'Updating Cobalt Strike...'
+echo '========================='
+echo ' '
+cd /opt/cobaltstrike
+./update
+
+# Shrink VM image size
+echo ' '
+echo '=========================='
+echo 'Shrinking VM image size...'
+echo '=========================='
+echo ' '
+
+# Because this can cause the screen to blank and the system to become
+# unresponsive to input, we request confirmation for this to continue.
+# After it's done, we halt the system.
+while true; do
+	read -p "Do you wish to shrink the VM image? [Y/N] " yn
+	case $yn in
+		[Yy]* ) vmware-toolbox-cmd disk shrink /; shutdown -h now; break;;
+		[Nn]* ) exit;;
+		* ) echo "Please answer yes or no.";;
+	esac
+done
