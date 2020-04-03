@@ -1,12 +1,25 @@
 #!/bin/bash
 
 # If for whatever reason you're not using /root, change this.
+echo ' '
+echo '========================'
+echo 'Copying profile files...'
+echo '========================'
+echo ' '
 cp -f profile/* /home/root
 
 # Update things before we install things
+echo '================'
+echo 'Updating Kali...'
+echo '================'
+echo ' '
 apt update && apt dist-upgrade && apt autoremove
 
 # Let's install lots of packages
+echo '=========================================='
+echo 'Installing useful things from Kali repo...'
+echo '=========================================='
+echo ' '
 apt install \
   kali-tools-802-11 \
   kali-tools-bluetooth \
@@ -40,12 +53,23 @@ apt install \
   neo4j bloodhound \
   testssl sslscan \
   postgresql \
-  vim
+  vim gedit \
+  wireguard
+apt autoremove
 
 # Initialize Metasploit database
+echo '==================================='
+echo 'Initializing Metasploit database...'
+echo '==================================='
+echo ' '
+systemctl start postgresql.service
 msfdb --init
 
 # Grab some things from Github
+echo '================================'
+echo 'Installing extras from Github...'
+echo '================================'
+echo ' '
 cd /opt
 git clone https://github.com/hak5darren/USB-Rubber-Ducky.git
 git clone https://github.com/dbcli/mssql-cli
