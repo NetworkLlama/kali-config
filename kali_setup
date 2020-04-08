@@ -46,12 +46,13 @@ apt install \
   kali-tools-web \
   kali-tools-windows-resources \
   kali-tools-wireless \
-  gdm3 mate \
-  chromium tor tor-browser \
+  mate \
+  chromium tor torbrowser-launcher \
   crackmapexec \
   powershell powershell-empire powersploit \
   neo4j bloodhound \
-  testssl sslscan \
+  testssl.sh sslscan \
+  python3-pip \
   postgresql \
   vim gedit \
   wireguard
@@ -63,7 +64,14 @@ echo 'Initializing Metasploit database...'
 echo '==================================='
 echo ' '
 systemctl start postgresql.service
-msfdb --init
+msfdb init
+
+# Grab some things from Github
+echo '======================================'
+echo 'Installing extra Python-based tools...'
+echo '======================================'
+echo ' '
+python3 -m pip install mssql-cli
 
 # Grab some things from Github
 echo '================================'
@@ -72,4 +80,3 @@ echo '================================'
 echo ' '
 cd /opt
 git clone https://github.com/hak5darren/USB-Rubber-Ducky.git
-git clone https://github.com/dbcli/mssql-cli
