@@ -6,7 +6,7 @@ echo '========================'
 echo 'Copying profile files...'
 echo '========================'
 echo ' '
-cp -f profile/* /home/root
+cp -f profile/* ~
 
 # Update things before we install things
 echo '================'
@@ -46,12 +46,12 @@ apt install \
   kali-tools-web \
   kali-tools-windows-resources \
   kali-tools-wireless \
-  mate \
+  gdm3 cinnamon \
   chromium tor torbrowser-launcher \
   crackmapexec \
   powershell powershell-empire powersploit \
   neo4j bloodhound \
-  testssl.sh sslscan \
+  jython jruby testssl.sh sslscan \
   python3-pip \
   postgresql \
   vim gedit \
@@ -80,3 +80,16 @@ echo '================================'
 echo ' '
 cd /opt
 git clone https://github.com/hak5darren/USB-Rubber-Ducky.git
+
+# Configure desktop display
+# Grab some things from Github
+echo '================================'
+echo 'Configuring desktop...'
+echo '================================'
+echo ' '
+echo "cinnamon" > ~/.xsession
+# Note: Make sure 3D hardware accelleration is turned on in the VM hardware
+# settings. If it is and you still get a pop-up that it's not working or you
+# get rendering errors, uncomment and run the following.
+# echo "cinnamon-session-cinnamon2d" > ~/.xsession
+# TODO: Add resolution options
